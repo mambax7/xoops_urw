@@ -1,0 +1,55 @@
+Options +FollowSymlinks
+RewriteEngine on
+RewriteBase /255/
+
+# RewriteRule	^(userinfo.php)$	        modules/profile/userinfo.php       [L]
+# RewriteRule	^(register.php)$	        modules/profile/register.php       [L]
+# RewriteRule	^(user.php)$	                modules/profile/user.php           [L]
+
+##############################
+### Start module rewriting: [system] ###
+
+  RewriteRule	^userinfo\/(|[0-9]+)\/.*$  userinfo.php?uid=$1       [L]
+# RewriteRule	^register\/.*$	           register.php              [L]
+  RewriteRule	^search\/.*$               search.php                [L]
+  RewriteRule	^admin\/.*$                admin.php                 [L]
+  RewriteRule	^user\/logout\/.*$         user.php?op=logout        [L]
+  RewriteRule	^user\/.*$                 user.php                  [L]
+  RewriteRule	^edituser\/.*$             edituser.php              [L]
+  RewriteRule	^notifications\/.*$        notifications.php         [L]
+  RewriteRule	^viewpmsg\/.*$             viewpmsg.php              [L]
+
+### End module rewriting: [system] ###
+##############################
+
+
+##############################
+### Start module rewriting: [mymodule] ###
+
+  ## Module: [mymodule] - Page: index.php
+  ## Separator : ( - )
+       RewriteRule ^new_name\/pages\/(|[aA-zZ0-9]+)\-(|[0-9]+)\-(|[0-9]+)\-(|[0-9]+)\-(|[0-9]+)\-(|[0-9]+)\-(|[0-9]+)\-(|[aA-zZ0-9]+)\-(|[aA-zZ0-9]+)\/.*$  modules/mymodule/index.php?UrwExt=$1&UrwIsActive=$2&UrwMaxKeyW=$3&UrwMaxKeyWSize=$4&UrwSeparator=$5&op_1=$6&op_2=$7&op_3=$8&op_4=$9 [L]
+  ## Separator : ( , )
+       RewriteRule ^new_name\/pages\/(|[aA-zZ0-9]+)\,(|[0-9]+)\,(|[0-9]+)\,(|[0-9]+)\,(|[0-9]+)\,(|[0-9]+)\,(|[0-9]+)\,(|[aA-zZ0-9]+)\,(|[aA-zZ0-9]+)\/.*$  modules/mymodule/index.php?UrwExt=$1&UrwIsActive=$2&UrwMaxKeyW=$3&UrwMaxKeyWSize=$4&UrwSeparator=$5&op_1=$6&op_2=$7&op_3=$8&op_4=$9 [L]
+  ## Separator : ( | )
+       RewriteRule ^new_name\/pages\/(|[aA-zZ0-9]+)\|(|[0-9]+)\|(|[0-9]+)\|(|[0-9]+)\|(|[0-9]+)\|(|[0-9]+)\|(|[0-9]+)\|(|[aA-zZ0-9]+)\|(|[aA-zZ0-9]+)\/.*$  modules/mymodule/index.php?UrwExt=$1&UrwIsActive=$2&UrwMaxKeyW=$3&UrwMaxKeyWSize=$4&UrwSeparator=$5&op_1=$6&op_2=$7&op_3=$8&op_4=$9 [L]
+  ## Separator : ( _ )
+       RewriteRule ^new_name\/pages\/(|[aA-zZ0-9]+)\_(|[0-9]+)\_(|[0-9]+)\_(|[0-9]+)\_(|[0-9]+)\_(|[0-9]+)\_(|[0-9]+)\_(|[aA-zZ0-9]+)\_(|[aA-zZ0-9]+)\/.*$  modules/mymodule/index.php?UrwExt=$1&UrwIsActive=$2&UrwMaxKeyW=$3&UrwMaxKeyWSize=$4&UrwSeparator=$5&op_1=$6&op_2=$7&op_3=$8&op_4=$9 [L]
+       RewriteRule ^new_name\/pages\/.*$ modules/mymodule/index.php [L]
+
+  ## Module: [mymodule] - Page: item.php
+  ## Separator : ( - )
+       RewriteRule ^new_name\/page\/(|[0-9]+)\-(|[aA-zZ0-9]+)\/.*$  modules/mymodule/item.php?id=$1&op=$2 [L]
+  ## Separator : ( , )
+       RewriteRule ^new_name\/page\/(|[0-9]+)\,(|[aA-zZ0-9]+)\/.*$  modules/mymodule/item.php?id=$1&op=$2 [L]
+  ## Separator : ( | )
+       RewriteRule ^new_name\/page\/(|[0-9]+)\|(|[aA-zZ0-9]+)\/.*$  modules/mymodule/item.php?id=$1&op=$2 [L]
+  ## Separator : ( _ )
+       RewriteRule ^new_name\/page\/(|[0-9]+)\_(|[aA-zZ0-9]+)\/.*$  modules/mymodule/item.php?id=$1&op=$2 [L]
+       RewriteRule ^new_name\/page\/.*$ modules/mymodule/item.php [L]
+
+    # Module: [mymodule] - Main index
+       RewriteRule ^new_name.*$  modules/mymodule/ [L]
+
+### End module rewriting: [mymodule] ###
+##############################

@@ -1,0 +1,35 @@
+<!-- End - Module:todo - Template:[ADMIN]  Default Content -->
+<{if $items}>
+  <div style="min-height:300px">
+  <{foreach item=item from=$items}>
+    <div style="margin: 12px;">
+    <{$item}>
+    </div>
+  <{/foreach}>
+  </div>
+<{include file="db:admin/todo_admin_footer.html"}>
+<{/if}>
+
+<{if $table}>
+
+  <div style="min-height:300px;">
+  <{foreach item=item key=title from=$table}>
+
+  <table class="outer" style="width:468px; margin: auto;">
+  <caption class="head"><{$title}></caption>
+    <tbody>
+    <{foreach item=row key=caption from=$item}>
+      <tr class="<{cycle values="odd,even"}>">
+          <th><{$caption}></th>
+          <td><{$row}></td>
+      </tr>
+    <{/foreach}>
+    </tbody>
+  </table>
+  <{/foreach}>
+  </div>
+<{include file="db:admin/todo_admin_footer.html"}>
+
+<{/if}>
+
+<!-- End - Module:todo - Template:[ADMIN] Default Content -->

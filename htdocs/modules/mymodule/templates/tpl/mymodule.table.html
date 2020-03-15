@@ -1,0 +1,573 @@
+<!-- Start - Module:mymodule - Template: Table -->
+<script type="text/javascript" language="javascript"  src="<{xoAppUrl modules/mymodule/script/LineNumbers.js}>"></script>
+<script type="text/javascript" language="javascript"  src="<{xoAppUrl modules/mymodule/script/starter/script.js}>"></script>
+<link   type="text/css"        rel="stylesheet"      href="<{xoAppUrl modules/mymodule/script/starter/style.css}>" />
+
+<style>
+table .outer textarea  { width: 100%; height: 60px; font-size: 85%; background-color: lightYellow; border-style: solid;}
+table .outer td        { font-size: 85%; }
+table .text input      { width: 100%;               font-size: 85%; background-color: lightYellow; border-style: solid;}
+table .border td       { border: 1px dashed lightGrey; border-top: 0; }
+table .border td input.input { border: 1px dashed lightGrey;  background-color: lightYellow; }
+</style>
+
+<div class="itemHead">
+  <a href="<{xoAppUrl /modules/mymodule}>">Home</a> >>
+  <a href="<{xoAppUrl /modules/system/admin.php?fct=preferences&op=show&confcat_id=}><{$mid}>">Core settings</a> >>
+  <a href="<{xoAppUrl /modules/system/admin.php?fct=preferences&op=show&confcat_id=}><{$mid}>">Module settings</a> >>
+  <a href="<{xoAppUrl /modules/mymodule/admin/urw.php}>">.htaccess generator</a>
+</div>
+<!--
+    <div style="font-size:80%;text-align:left;">
+      <ul>
+        <li>php: <a href="<{xoAppUrl /}><{$url}>"><{$url}></a></li>
+        <li>urw: <a href="<{xoAppUrl /}><{$urw_link}>"><{$urw_link}></a></li>
+      </ul>
+    </div>
+ -->
+    <{assign var=php_url value='/'|explode:$url}>
+    <{assign var=urw_url value='/'|explode:$urw_link}>
+
+    <{assign var=sub_urw_url value='?'|explode:$php_url[2]}>
+
+    <table class="outer border" style="width: 75%; margin: 6px auto; text-align:center;">
+      <thead>
+      <tr class="odd">
+        <th style="visibility:hidden"></th>
+        <th class="hotspot" onmouseover="tooltip.show('How long is the final url...');" onmouseout="tooltip.hide();">Uri lenght</th>
+        <th>Directory</th>
+        <th>Module</th>
+        <th>File</th>
+        <th>Operators</th>
+        <th>SEO Text</th>
+      </tr>
+     </thead>
+     
+     <tbody>
+
+      <tr class="odd">
+        <th rowspan="3">Php</th>
+        <td rowspan="3" class="head"><{$url|strlen}></td>
+        <td colspan="5" style="text-align:left;"><a href="<{xoAppUrl /}><{$url}>"><{$url}></a></td>
+      <tr>
+
+      <tr class="odd">
+        <td><{$php_url[0]}></td>
+        <td><{$php_url[1]}></td>
+        <td><{$sub_urw_url[0]}></td>
+        <td><{$sub_urw_url[1]}></td>
+        <td></td>
+      </tr>
+
+      
+      <tr class="even">
+        <th rowspan="3">URW</th>
+        <td rowspan="3" class="head"><{$urw_link|strlen}></td>
+        <td colspan="5" style="text-align:left;"><a href="<{xoAppUrl /}><{$urw_link}>"><{$urw_link}></a></td>
+      <tr>
+
+      <tr class="even">
+        <td></td>
+        <td><{$urw_url[0]}></td>
+        <td><{$urw_url[1]}></td>
+        <td><{$urw_url[2]}></td>
+        <td><{$urw_url[3]}></td>
+      </tr>
+
+      <tr class="odd">
+        <th>Smarty Side</th>
+        <td colspan="6" style="text-align:left;"><textarea><{literal}><{$urw->XoUrlRewrite(<{/literal}><{$description}><{literal}>, "<{/literal}><{$surl}><{literal}>")}><{/literal}></textarea></td>
+      <tr>
+
+      <tr class="odd">
+        <th>Php Side</th>
+        <td colspan="6" style="text-align:left;"><textarea><{literal}>$link =  '<a href="'.$urw->XoUrlRewrite('<{/literal}><{$description}><{literal}>', '<{/literal}><{$surl}><{literal}>').'"><{/literal}><{$caption}><{literal}></a><{literal}>';
+
+$xoopsTpl->assign('link', $link);<{/literal}></textarea></td>
+      <tr>
+      </tbody>
+    </table>
+    
+
+    
+    
+
+
+<div style="float:left;">
+<form name="form" id="form" action="." method="post" onsubmit="return xoopsFormValidate_form();" enctype="multipart/form-data"
+      style="width: 100%; margin:auto;">
+
+
+<table class="outer border" style="width: 320px; margin:12px auto; text-align:center;">
+    <thead>
+      <tr>
+      <th style="width:10%">Id</th>
+      <th style="width:10%;">Type</th>
+      <th style="width:80%">Result</th>
+      </tr>
+    </thead>
+
+     <tfoot>
+      <tr class="foot">
+      <td colspan="3" style="text-align:center;">
+              <input type="submit"  class="formButton"
+                     value="Test it!" title="Search" />
+    
+              <input type="button"
+                     name="Cancel" 
+                     value="Cancel" 
+                     onclick="window.location=''" />
+     </td>
+     </tr>
+     </tfoot>
+
+    <tbody>
+     <{foreach item=item key=key from=$sample}>
+      <tr class="<{cycle values="odd,even"}>">
+        <th class="head"><{$key}></th>
+          <td style="border-right:1px dashed lightGrey;"><{$item.tp}></td>
+          <td><input name="<{$key}>"
+                     id="<{$key}>"
+                     size="3"
+                     class="input"
+                     maxlength="" 
+                     value="<{$item.id}>" 
+                     title="<{$key}>"
+                     type="text">
+          </td>
+        </tr>
+     <{/foreach}>
+
+      <tr class="<{cycle values="odd,even"}>">
+        <th class="head">Text</th>
+          <td colspan="2">
+              <input name="seo"
+                     id="seo"
+                     size="32"
+                     class="input"
+                     maxlength="64"
+                     value="<{$description}>"
+                     title="<{$caption}>"
+                     type="text">
+          </td>
+        </tr>
+
+    </tbody>
+</table>
+</form>
+</div>
+
+
+
+<!-- Test options -->
+
+
+<div style="float:right;">
+<form name="form_2" id="form_2" action="." method="post" onsubmit="return xoopsFormValidate_form();" enctype="multipart/form-data"
+      style="width: 100%; margin:auto;">
+<table class="outer border" style="width: 480px; margin: 12px auto;">
+<caption>Core / Module  Settings</caption>
+ <tfoot>
+  <tr class="foot">
+  <td colspan="3" style="border-right:0;"></td>
+  <td style="text-align:center;border-left:0;">
+          <input type="submit"  class="formButton"
+                 value="Test it!" title="Search" />
+
+          <input type="button"
+                 name="Cancel" 
+                 value="Cancel"
+                 onclick="window.location=''" />
+ </td>
+ </tr>
+ </tfoot>
+
+ <thead>
+  <tr>
+    <th style="width:15%">Functions</th>
+    <th style="width:10%">Core</th>
+    <th style="width:10%">Module</th>
+    <th style="width:65%">Options</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr class="odd">
+   <td class="head hotspot" onmouseover="tooltip.show('Url Rewriting activation on a core or a module level.');" onmouseout="tooltip.hide();">UrwIsActive</td>
+   <td class="center">x</td>
+   <td class="center">o</td>
+    <td class="even">
+       <input name="UrwIsActive"
+              id="UrwIsActive"
+              title="Activate"
+              value="1"
+              type="radio"
+              <{if $options.UrwIsActive==1}> checked<{/if}>> Yes
+       <input name="UrwIsActive"
+              id="UrwIsActive"
+              title="Deactivate"
+              value="0"
+              type="radio"
+              <{if $options.UrwIsActive==0}> checked<{/if}>> No
+    </td>
+  </tr>
+
+  <tr class="even">
+   <td class="head hotspot" onmouseover="tooltip.show('Define which kind of operator\'s separator is used in the url rewriting. Default it minus-sign.');" onmouseout="tooltip.hide();">UrwSeparator</td>
+   <td class="center">x</td>
+   <td class="center">o</td>
+    <td>
+      <select name="UrwSeparator" id="UrwSeparator" title="UrwSeparator" size="1">   <{$options.UrwSeparator}>
+      <{foreach item=separator key=key from=$separators}>
+        <option value="<{$key}>"<{if $options.UrwSeparator==$key}> selected<{/if}>><{$separator.name}></option>
+        <{/foreach}>
+      </select>
+    </td>
+  </tr>
+
+  <tr class="odd">
+   <td class="head hotspot" onmouseover="tooltip.show('Directory of the current module. Mandatory at Module level.');" onmouseout="tooltip.hide();">UrwModule</td>
+   <td class="center"></td>
+   <td class="center">x</td>
+    <td><{$module}></td>
+  </tr>
+
+  <tr class="even">
+   <td class="head hotspot" onmouseover="tooltip.show('Rewrited dirname of the current module name. Mandatory at Module level.');" onmouseout="tooltip.hide();">UrwModuleName</td>
+   <td class="center"></td>
+   <td class="center">x</td>
+    <td>
+       <input name="UrwModuleName"
+              id="UrwModuleName"
+              title="SEO module name"
+              value="<{$options.UrwModuleName}>"
+              type="text"
+              disabled="disabled"
+              style="background-color: #FBB;">
+    </td>
+  </tr>
+
+  <tr class="odd">
+   <td class="head hotspot" onmouseover="tooltip.show('Rewrited names of the module php files names. Mandatory at Module level.');" onmouseout="tooltip.hide();">UrwPagesNames</td>
+   <td class="center"></td>
+   <td class="center">x</td>
+    <td> index.php/item.php/etc.
+    </td>
+  </tr>
+
+  <tr class="even">
+   <td class="head hotspot" onmouseover="tooltip.show('List of the used operators for each and every php page. Mandatory at Module level.');" onmouseout="tooltip.hide();">UrwOperators</td>
+   <td class="center"></td>
+   <td class="center">x</td>
+   <td>op_1, op_2, op_3, etc.</td>
+  </tr>
+
+  <tr class="odd">
+   <td class="head hotspot" onmouseover="tooltip.show('Possible extensions for the url rewrite. Totally optionnal. Can be set to none.');" onmouseout="tooltip.hide();">UrwExt</td>
+   <td class="center">o</td>
+   <td class="center">o</td>
+    <td>
+       <input name="UrwExt"
+              id="UrwExt"
+              title="Extension"
+              value="<{$options.UrwExt}>"
+              type="text">
+    </td>
+  </tr>
+
+  <tr class="even">
+   <td class="head hotspot" onmouseover="tooltip.show('Define the minimum keywords lenght for the SEO converter and text generator. 0 keeps all the words.');" onmouseout="tooltip.hide();">UrwMaxKeyWSize</td>
+   <td class="center">o</td>
+   <td class="center">o</td>
+    <td>
+       <input name="UrwMaxKeyWSize"
+              id="UrwMaxKeyWSize"
+              title="SEO module name"
+              value="<{$options.UrwMaxKeyWSize}>"
+              type="text"
+              size="3">
+    </td>
+  </tr>
+
+  <tr class="odd">
+   <td class="head hotspot" onmouseover="tooltip.show('Number of maximum keywords to be used by the SEO words generator. Can be usefull to limit url size while using too big text as a SEO source. 0 keeps all the words. ');" onmouseout="tooltip.hide();">UrwMaxKeyW</td>
+   <td class="center">o</td>
+   <td class="center">o</td>
+    <td>
+       <input name="UrwMaxKeyW"
+              id="UrwMaxKeyW"
+              title="SEO module name"
+              value="<{$options.UrwMaxKeyW}>"
+              type="text"
+              size="3">
+    </td>
+  </tr>
+
+  </tbody>
+</table>
+</form>
+
+  <ul style="list-style:bullet; margin: -12px 0 0 0; " >
+    <li style="display:inline; padding: -6px 12px;"> x: Mandatory</li>
+    <li style="display:inline; padding: -6px 12px;"> o: optionnal</li>
+  </ul>
+</div>
+
+
+<div style="clear:both;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="itemHead" style="margin-top:12px;">header.php</div>
+<pre class="outer" style="height: 240px; margin-top:0; background-color:LightYellow;">
+
+####### URW Class inclusion
+include_once( XOOPS_ROOT_PATH . '/class/xoopsurw.php' );
+
+#### URW Class settings
+$urw  = &XoopsUrlRewrite::getInstance();
+
+$urw->UrwIsActive( 1 );
+$urw->UrwExt( 'html' );
+$urw->UrwSeparator( '|' );
+$urw->UrwMaxKeyWSize( 0 );
+$urw->UrwMaxKeyW( 0 );
+
+$urw->UrwModule($xoopsModule->getVar('dirname'));
+$urw->UrwModuleName( 'task_manager' );
+$urw->UrwPagesNames( array( 'index' => 'tasks',
+                             'item'  => 'task' ));
+
+$urw->UrwOperators( 'index| id:UrwIsActive,
+                            tx:UrwExt,
+                            id:UrwSeparator,
+                            id:UrwMaxKeyWSize,
+                            id:UrwMaxKeyW,
+                            id:op_6,
+                            id:op_7,
+                            tx:op_3,
+                            tx:op_2',
+
+                    'item| id:id,
+                            tx:op' );
+#### URW Module settings ###
+</pre>
+
+<script type='text/javascript'> showLineNumbers(); </script>
+
+
+
+<div class="itemHead" style="margin-top:12px;">Php fiels: index.php, item.php, etc.</div>
+<table class="outer" id="php">
+    <thead>
+      <tr>
+      <th style="width:10%">Type</th>
+      <th style="width:90%">Codes</th>
+      </tr>
+    </thead>
+
+
+    <tbody>
+
+      <tr>
+        <th colspan="2">#1: php version :: <{$link}></th>
+      </tr>
+
+      <tr class="odd">
+        <td class="head">Php</td>
+        <td>
+            <textarea><{literal}>
+$link =  '<a href="' . $urw->XoUrlRewrite( $description, 'index.php?op_1=1' . $ops[1]) . '"
+             title="' . $description . '">' . $caption . '</a>';
+$xoopsTpl->assign('link', $link);
+<{/literal}></textarea>
+         </td>
+        </tr>
+
+        <tr class="even">
+         <td class="head">Smarty</td>
+         <td>
+            <textarea><{literal}><{$link}><{/literal}></textarea>
+        </td>
+      </tr>
+      
+      
+      
+
+
+      <tr>
+        <th colspan="2">#2: smarty version :: <a href="<{$urw->XoUrlRewrite($description, "index.php?op_1=`$ops[1]`")}>" title="<{$description}>"> <{$caption}> </a></th>
+      </tr>
+
+      <tr class="odd">
+        <td class="head">Php</td>
+        <td>
+            <textarea><{literal}>
+$xoopsTpl->assign('caption',      $caption);
+$xoopsTpl->assign('description',  $description);<{/literal}></textarea>
+         </td>
+        </tr>
+
+        <tr class="even">
+         <td class="head">Smarty</td>
+         <td>
+            <textarea><{literal}>
+<a href="<{$urw->XoUrlRewrite($description, "index.php?op_1=`$ops[1]")}>"
+   title="<{$description}>">
+    <{$caption}>
+</a><{/literal}></textarea>
+        </td>
+      </tr>
+      
+
+      
+
+
+      <tr>
+        <th colspan="2">#2: mixed version :: <a href="<{$urw_link}>" title="<{$description}>"> <{$caption}> </a></th>
+      </tr>
+
+      <tr class="odd">
+        <td class="head">Php</td>
+        <td>
+            <textarea><{literal}>
+                                  $link =  $urw->XoUrlRewrite( $description, 'index.php?id=' . $ops[1]);
+$xoopsTpl->assign('urw_link',     $link);<{/literal}></textarea>
+         </td>
+        </tr>
+
+        <tr class="even">
+         <td class="head">Smarty</td>
+         <td>
+            <textarea><{literal}><a href="<{$urw_link}>"
+   title="<{$description}>">
+    <{$caption}>
+</a><{/literal}></textarea>
+        </td>
+      </tr>
+
+    </tbody>
+    
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="itemHead" style="margin-top:12px;">Template files: templates/index.html</div>
+<table class="outer text" id="smarty">
+    <thead>
+      <tr>
+      <th style="width:20%">Link</th>
+      <th style="width:80%">Code</th>
+      </tr>
+    </thead>
+
+
+    <tbody>
+      
+      <tr>
+        <td class="head" colspan="2">
+          With fixed variables
+        </td>
+      </tr>
+
+      <tr class="<{cycle name="table" values="odd,even"}>">
+          <td><a href="<{$urw->XoUrlRewrite('One Id', "index.php?op_1=1")}>#test">One Id </a>
+          </td>
+          <td>
+            <input style="width:100%;" value='<{literal}><{$urw->XoUrlRewrite("One Id", "index.php?op_1=1")}><{/literal}>'/>
+        </td>
+      </tr>
+
+      <tr class="<{cycle name="table" values="odd,even"}>">
+          <td><a href="<{$urw->XoUrlRewrite('Several mixed id operator', "index.php?op_2=4&op_1=1&op_4=4")}>#test"> Several mixed id operator</a>
+          </td>
+          <td>
+            <input style="width:100%;" value='<{literal}><{$urw->XoUrlRewrite("Several mixed id operator", "index.php?op_2=4&op_1=1&op_4=4")}><{/literal}>'/>
+        </td>
+      </tr>
+
+      <tr class="<{cycle name="table" values="odd,even"}>">
+          <td><a href="<{$urw->XoUrlRewrite('Text operator', "index.php?op_3=text")}>#test">Text operator </a>
+          </td>
+          <td>
+            <input style="width:100%;" value='<{literal}><{$urw->XoUrlRewrite("Text operator", "index.php?op_3=text")}><{/literal}>'/>
+        </td>
+      </tr>
+
+      <tr class="<{cycle name="table" values="odd,even"}>">
+          <td><a href="<{$urw->XoUrlRewrite("Mixed text and id", "index.php?op_1=1&op_2=2&op_3=three&op_4=four")}>#test"> Mixed text and id </a>
+          </td>
+          <td>
+            <input style="width:100%;" value='<{literal}><{$urw->XoUrlRewrite("Mixed text and id", "index.php?op_1=1&op_2=2&op_3=three&op_4=four")}><{/literal}>'/>
+        </td>
+      </tr>
+
+      <tr class="<{cycle name="table" values="odd,even"}>">
+          <td><a href="<{$urw->XoUrlRewrite("Full power :-D", "index.php?UrwIsActive=1&UrwExt=html&UrwSeparator=0&UrwMaxKeyWSize=0&UrwMaxKeyW=0&op_1=1&op_2=2&op_3=3&op_4=4")}>#test"> Full power :-D </a>
+          </td>
+          <td>
+            <input style="width:100%;" value='<{literal}><{$urw->XoUrlRewrite("Full power :-D", "index.php?op_1=1&op_2=2&op_3=3&op_2=4&op_5=5&op_6=6&op_7=7&op_3=height&op_2=nine")}><{/literal}>'/>
+        </td>
+      </tr>
+      
+      
+
+      <tr>
+        <td class="head" colspan="2">
+          With dynamic variables
+        </td>
+      </tr>
+
+      <tr class="<{cycle name="table" values="odd,even"}>">
+          <td><a href="<{$urw->XoUrlRewrite("This is nine", "index.php?op_2=nine")}>#test">This is nine</a>
+          </td>
+          <td>
+            <input style='width:100%;' value='<{literal}><{$urw->XoUrlRewrite("This is `$ops[9]`", "index.php?op_2=`$ops[9]`")}><{/literal}>'  disabled="disabled"/>
+        </td>
+      </tr>
+
+      <tr class="<{cycle name="table" values="odd,even"}>">
+         <{if $ops[8]}><{assign var=height value=$ops[8]}><{else}><{assign var=height value="height"}><{/if}>
+         <{if $ops[9]}><{assign var=nine   value=$ops[9]}><{else}><{assign var=nine   value="nine"}><{/if}>
+          <td><a href="<{$urw->XoUrlRewrite("This `$ops[8]` is `$ops[9]'`", "index.php?op_3=`$ops[8]`&op_2=`$ops[9]`")}>#test">This <{$height}> is <{$nine}></a>
+          </td>
+          <td>
+            <input style='width:100%;' value='<{literal}><{$urw->XoUrlRewrite("This `$ops[9]` is `$ops[8]`", "index.php?op_3=`$ops[8]`&op_2=`$ops[9]`")}>#test<{/literal}>'  disabled="disabled"/>
+        </td>
+      </tr>
+
+      <tr class="<{cycle name="table" values="odd,even"}>">
+          <td><a href="<{$urw->XoUrlRewrite("This `$ops[8]` is `$ops[9]'`", "index.php?op_3=`$ops[8]`&op_2=`$ops[9]`")}>#test">This <{$height}> is <{$nine}></a>
+          </td>
+          <td>
+            <input style='width:100%;' value='<{literal}><{$urw->XoUrlRewrite("This `$ops[9]` is `$ops[8]`", "index.php?op_3=`$ops[8]`&op_2=`$ops[9]`")}>#test<{/literal}>'  disabled="disabled"/>
+        </td>
+      </tr>
+      
+
+    </tbody>
+    
+</table>
+
+<!-- End - Module:mymodule - Template: Table -->
